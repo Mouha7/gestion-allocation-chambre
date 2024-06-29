@@ -7,16 +7,20 @@ import lombok.Data;
 
 @Data
 public class Pavillon {
+    private int id;
+    private static int nbr;
     private int numero;
     private int nbrEtage;
     private List<Chambre> chambres = new ArrayList<>();
 
     public Pavillon(int numero, int nbrEtage) {
+        this.id = ++nbr;
         this.numero = numero;
         this.nbrEtage = nbrEtage;
     }
 
     public Pavillon() {
+        this.id = ++nbr;
     }
 
     public void addChambre(Chambre chambre) {

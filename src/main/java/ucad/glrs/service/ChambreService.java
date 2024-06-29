@@ -3,41 +3,44 @@ package ucad.glrs.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import ucad.glrs.core.Repository;
 import ucad.glrs.core.Service;
 import ucad.glrs.data.entity.Chambre;
 
 public class ChambreService implements Service<Chambre> {
-    List<Chambre> chambres = new ArrayList<>();
+    private Repository<Chambre> repository;
+    
+
+    public ChambreService(Repository<Chambre> repository) {
+        this.repository = repository;
+    }
+
+    public ChambreService() {
+    }
 
     @Override
     public boolean save(Chambre objet) {
-        chambres.add(objet);
-        return true;
+        return repository.insert(objet);
     }
 
     @Override
     public List<Chambre> show() {
-        return chambres;
+        return repository.selectAll();
     }
 
     @Override
     public int count() {
-        return chambres.size();
+        return repository.count();
     }
 
     @Override
     public Chambre getBy(int value) {
-        for (Chambre chambre : chambres) {
-            if (chambre.getNumChambre() == value) {
-                return chambre;
-            }
-        }
-        return null;
+        return repository.selectBy(value);
     }
 
     @Override
     public Chambre getBy(String value) {
-        throw new UnsupportedOperationException("Unimplemented method 'getBy'");
+        return repository.selectBy(value);
     }
     
 }

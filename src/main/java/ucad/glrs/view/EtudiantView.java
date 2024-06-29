@@ -44,7 +44,9 @@ public class EtudiantView extends Implementation<Etudiant> {
         String prenom;
         String email;
         String tel;
-        String dateNaiss;
+        String dateNaissStr;
+        Date dateNaiss = null;
+
         System.out.print("Entrez le nom de l'étudiant : ");
         nom = scanner.nextLine();
         System.out.print("Entrez le prénom de l'étudiant : ");
@@ -55,8 +57,16 @@ public class EtudiantView extends Implementation<Etudiant> {
         tel = scanner.nextLine();
         do {
             System.out.print("Entrez la date de naissance (jj/mm/aaaa) : ");
-            dateNaiss = scanner.nextLine();
-            test = checkDate(dateNaiss);
+            dateNaissStr = scanner.nextLine();
+            test = checkDate(dateNaissStr);
+            if (test) {
+                try {
+                    dateNaiss = new SimpleDateFormat("dd/MM/yyyy").parse(dateNaissStr);
+                } catch (ParseException e) {
+                    System.out.println("Erreur de conversion de la date. Veuillez réessayer.");
+                    test = false;
+                }
+            }
         } while (!test);
 
         Etudiant etudiant;
@@ -102,7 +112,7 @@ public class EtudiantView extends Implementation<Etudiant> {
     }
 
     public EtudiantBoursier saisieEtudiantBoursier(String nom, String prenom, String email, String tel,
-            String dateNaiss) {
+            Date dateNaiss) {
         TypeBourse typeBourse = etudiantBoursierView.saisiTypeBourse();
         BoursierLoger boursierLoger = boursierLogerView.saisie();
         EtudiantBoursier etudiantBoursier;
@@ -122,7 +132,7 @@ public class EtudiantView extends Implementation<Etudiant> {
     }
 
     public EtudiantNonBoursier saisieEtudiantNonBoursier(String nom, String prenom, String email, String tel,
-            String dateNaiss) {
+            Date dateNaiss) {
         System.out.println("Entrez l'adresse de l'étudiant : ");
         String adresse = scanner.nextLine();
         EtudiantNonBoursier etudiantNonBoursier = new EtudiantNonBoursier(nom, prenom, email, tel, dateNaiss, adresse);

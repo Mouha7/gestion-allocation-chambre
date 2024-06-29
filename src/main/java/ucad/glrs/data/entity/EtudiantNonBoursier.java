@@ -1,16 +1,22 @@
 package ucad.glrs.data.entity;
 
+import java.util.Date;
+
 import lombok.Data;
 
 @Data
 public class EtudiantNonBoursier extends Etudiant {
+    private int id;
+    private static int nbr;
     private String adresse;
 
     public EtudiantNonBoursier() {
+        this.id = ++nbr;
     }
 
-    public EtudiantNonBoursier(String nom, String prenom, String email, String tel, String dateNaiss, String adresse) {
+    public EtudiantNonBoursier(String nom, String prenom, String email, String tel, Date dateNaiss, String adresse) {
         super(nom, prenom, email, tel, dateNaiss);
+        this.id = ++nbr;
         this.adresse = adresse;
     }
 

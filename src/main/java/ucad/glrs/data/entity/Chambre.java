@@ -8,6 +8,8 @@ import ucad.glrs.data.enums.TypeChambre;
 
 @Data
 public class Chambre {
+    private int id;
+    private static int nbr;
     private int numChambre;
     private int numEtage;
     private TypeChambre typeChambre;
@@ -16,17 +18,22 @@ public class Chambre {
     private List<BoursierLoger> boursierLogers = new ArrayList<>();
 
     public Chambre(int numChambre, int numEtage, TypeChambre typeChambre, Pavillon pavillon) {
+        this.id = ++nbr;
         this.numChambre = numChambre;
         this.numEtage = numEtage;
         this.typeChambre = typeChambre;
         this.pavillon = pavillon;
-        isActif = true;
+        this.isActif = true;
     }
 
     public Chambre() {
-        isActif = true;
+        this.id = ++nbr;
+        this.isActif = true;
     }
     
+    public boolean getIsActif() {
+        return isActif;
+    }
 
     public void addChambre(BoursierLoger boursierLoger) {
         boursierLogers.add(boursierLoger);
@@ -34,8 +41,8 @@ public class Chambre {
 
     @Override
     public String toString() {
-        return "Chambre{" +
-                "numChambre=" + numChambre +
+        return "Chambre{" + "ID: " + id +
+                ", numChambre=" + numChambre +
                 ", numEtage=" + numEtage +
                 ", typeChambre=" + typeChambre +
                 ", état chambre=" + isActif +

@@ -2,6 +2,7 @@ package ucad.glrs;
 
 import java.util.Scanner;
 
+import ucad.glrs.core.Repository;
 import ucad.glrs.core.Service;
 import ucad.glrs.data.entity.BoursierLoger;
 import ucad.glrs.data.entity.Chambre;
@@ -9,6 +10,8 @@ import ucad.glrs.data.entity.Etudiant;
 import ucad.glrs.data.entity.EtudiantBoursier;
 import ucad.glrs.data.entity.EtudiantNonBoursier;
 import ucad.glrs.data.entity.Pavillon;
+import ucad.glrs.data.repository.ChambreDB;
+import ucad.glrs.data.repository.ChambreList;
 import ucad.glrs.service.BousierLogerService;
 import ucad.glrs.service.ChambreService;
 import ucad.glrs.service.EtudiantBoursierService;
@@ -24,8 +27,11 @@ public class Main {
     private static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
+        // Repository<Chambre> chambreRepository = new ChambreList();
+        Repository<Chambre> chambreRepository = new ChambreDB();
+
         Service<Pavillon> pavillonService = new PavillonService();
-        Service<Chambre> chambreService = new ChambreService();
+        Service<Chambre> chambreService = new ChambreService(chambreRepository);
         Service<Etudiant> etudiantService = new EtudiantService();
         Service<EtudiantBoursier> etudiantBoursierService = new EtudiantBoursierService();
         Service<EtudiantNonBoursier> etudiantNonBoursierService = new EtudiantNonBoursierService();
@@ -88,6 +94,7 @@ public class Main {
     }
 
     public static int menu() {
+        System.out.println("------Menu principal------");
         System.out.println("1-  Ajouter des pavillons.");
         System.out.println("2-  Modifier un pavillon.");
         System.out.println("3-  Lister les pavillons.");

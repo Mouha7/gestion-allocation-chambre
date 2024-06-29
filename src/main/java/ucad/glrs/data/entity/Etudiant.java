@@ -1,25 +1,30 @@
 package ucad.glrs.data.entity;
 
+import java.util.Date;
+
 import lombok.Data;
 
 @Data
 public class Etudiant {
+    private int id;
     private static int nbr;
     private String matricule;
     private String nom;
     private String prenom;
     private String email;
     private String tel;
-    private String dateNaiss;
+    private Date dateNaiss;
     
     public Etudiant() {
-        int size=String.valueOf(++nbr).length();
-        matricule = "MAT"+"O".repeat(size>4?0:4-size)+(++nbr);
+        this.id = ++nbr;
+        int size=String.valueOf(id).length();
+        this.matricule = "MAT"+"O".repeat(size>4?0:4-size)+(id);
     }
 
-    public Etudiant(String nom, String prenom, String email, String tel, String dateNaiss) {
-        int size=String.valueOf(++nbr).length();
-        matricule = "MAT"+"O".repeat(size>4?0:4-size)+(++nbr);
+    public Etudiant(String nom, String prenom, String email, String tel, Date dateNaiss) {
+        this.id = ++nbr;
+        int size=String.valueOf(id).length();
+        this.matricule = "MAT"+"O".repeat(size>4?0:4-size)+(id);
         this.nom = nom;
         this.prenom = prenom;
         this.email = email;

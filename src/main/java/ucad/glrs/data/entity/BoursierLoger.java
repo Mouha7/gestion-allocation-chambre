@@ -1,16 +1,21 @@
 package ucad.glrs.data.entity;
 
+import java.util.Date;
+
 import lombok.Data;
 import ucad.glrs.data.enums.TypeBourse;
 
 @Data
 public class BoursierLoger extends EtudiantBoursier {
+    private int id;
+    private static int nbr;
     private Chambre chambre;
     
     public BoursierLoger() {
+        this.id = ++nbr;
     }
 
-    public BoursierLoger(String nom, String prenom, String email, String tel, String dateNaiss,
+    public BoursierLoger(String nom, String prenom, String email, String tel, Date dateNaiss,
             TypeBourse typeBourse, Chambre chambre) {
         super(nom, prenom, email, tel, dateNaiss, typeBourse);
         this.chambre = chambre;
